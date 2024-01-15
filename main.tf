@@ -23,7 +23,7 @@ resource "aws_security_group" "main" {
   }
 }
 
-resource "aws_lb" "main" {
+resource "aws_alb" "main" {
   name               = "${var.name}-${var.env}-lb"
   internal           = var.internal
   load_balancer_type = var.load_balancer_type
