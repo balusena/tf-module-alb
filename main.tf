@@ -43,7 +43,7 @@ resource "aws_lb_listener" "main" {
 
     fixed_response {
       content_type = "text/plain"
-      message_body = "Default"
+      message_body = "Default Error"
       status_code  = "500"
     }
   }
