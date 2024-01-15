@@ -24,11 +24,11 @@ resource "aws_security_group" "main" {
 }
 
 resource "aws_alb" "main" {
-  name               = "${var.name}-${var.env}-lb"
+  name               = "${var.name}-${var.env}-alb"
   internal           = var.internal
   load_balancer_type = var.load_balancer_type
   security_groups    = [aws_security_group.main.id]
   subnets            = var.subnets
 
-  tags = merge({ Name = "${var.name}-{var.env}-lb" }, var.tags)
+  tags = merge({ Name = "${var.name}-{var.env}-alb" }, var.tags)
 }
