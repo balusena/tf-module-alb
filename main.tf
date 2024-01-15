@@ -33,10 +33,6 @@ resource "aws_lb" "main" {
   tags = merge({ Name = "${var.name}-${var.env}-lb" }, var.tags)
 }
 
-resource "aws_lb" "front_end" {
-  # ...
-}
-
 resource "aws_lb_listener" "main" {
   load_balancer_arn = aws_lb.main.arn
   port              = var.port
