@@ -23,12 +23,32 @@ resource "aws_security_group" "main" {
   }
 }
 
-resource "aws_alb" "main" {
-  name               = "${var.name}-${var.env}-alb"
+resource "aws_lb" "main" {
+  name               = "${var.name}-${var.env}-lb"
   internal           = var.internal
   load_balancer_type = var.load_balancer_type
   security_groups    = [aws_security_group.main.id]
   subnets            = var.subnets
 
-  tags = merge({ Name = "${var.name}-${var.env}-alb" }, var.tags)
+  tags = merge({ Name = "${var.name}-${var.env}-lb" }, var.tags)
+}
+
+resource "aws_lb" "front_end" {
+  # ...
+}
+
+resource "aws_lb_listener" "main" {
+  load_balancer_arn = aws_lb.main.arn
+  port              = var.port
+  protocol          = "HTTP"
+
+  default_action {
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "text/plain"
+      message_body = "Default"
+      status_code  = "500"
+    }
+  }
 }
