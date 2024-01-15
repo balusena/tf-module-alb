@@ -30,5 +30,5 @@ resource "aws_alb" "main" {
   security_groups    = [aws_security_group.main.id]
   subnets            = var.subnets
 
-  tags = merge({ Name = "${var.name}-{var.env}-alb" }, var.tags)
+  tags = merge({ Name = "${var.name}-${var.env}-alb" }, var.tags)
 }
